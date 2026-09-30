@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ChevronDown, ExternalLink, Star, Trash2 } from 'lucide-react';
-import { Avatar, ErrorState, FullPageSpinner, IconButton, StatusPill, statusLabel, useToast } from '@/components/ui';
+import { Avatar, ErrorState, FullPageSpinner, IconButton, StatusPill, statusLabel, ThemeToggle, useToast } from '@/components/ui';
 import { useCancelEmail, useEmail, useSession } from '@/hooks/queries';
 import { useStarred } from '@/hooks/useStarred';
 import { longTime, nameFromAddress, relative } from '@/lib/format';
@@ -59,6 +59,7 @@ export function EmailDetailPage() {
         >
           <Trash2 className="size-4" />
         </IconButton>
+        <ThemeToggle />
         <span className="mx-1 h-5 w-px bg-line" />
         {me && <Avatar src={me.avatarUrl} name={me.name || me.email} size={28} />}
       </header>

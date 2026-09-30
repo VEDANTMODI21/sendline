@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Navigate, useSearchParams } from 'react-router-dom';
 import { AlertCircle } from 'lucide-react';
-import { Button, Input } from '@/components/ui';
+import { Button, Input, ThemeToggle } from '@/components/ui';
 import { links } from '@/lib/api';
 import { useSession } from '@/hooks/queries';
 import { Logo } from '@/components/layout/Logo';
@@ -39,7 +39,8 @@ export function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-full flex-col items-center justify-center bg-white px-4">
+    <div className="relative flex min-h-full flex-col items-center justify-center bg-surface px-4">
+      <ThemeToggle className="absolute top-4 right-4" />
       <div className="mb-8">
         <Logo />
       </div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Paperclip, X } from 'lucide-react';
-import { Button, FormRow, IconButton, NumberBox, useToast } from '@/components/ui';
+import { Button, FormRow, IconButton, NumberBox, ThemeToggle, useToast } from '@/components/ui';
 import { useAppConfig, useSchedule, useSenders } from '@/hooks/queries';
 import { ApiError } from '@/lib/http';
 import { longTime, pluralize, relative } from '@/lib/format';
@@ -115,6 +115,7 @@ export function ComposePage() {
             </button>
           </span>
         )}
+        <ThemeToggle />
         <IconButton label="Attachments are not supported for scheduled campaigns" disabled>
           <Paperclip className="size-4" />
         </IconButton>

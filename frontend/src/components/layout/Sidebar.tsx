@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Clock, Send } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { User } from '@/types/api';
-import { Button } from '@/components/ui';
+import { Button, ThemeToggle } from '@/components/ui';
 import { useOverview } from '@/hooks/queries';
 import { cn } from '@/lib/cn';
 import { Logo } from './Logo';
@@ -31,8 +31,9 @@ export function Sidebar({ user }: { user: User }) {
   const overview = useOverview();
   return (
     <aside className="flex w-60 shrink-0 flex-col gap-4 border-r border-line px-3 py-4">
-      <div className="px-1.5 pt-1">
+      <div className="flex items-center justify-between pt-1 pl-1.5">
         <Logo />
+        <ThemeToggle />
       </div>
       <UserMenu user={user} />
       <Button variant="outline" pill className="w-full" onClick={() => navigate('/compose')}>

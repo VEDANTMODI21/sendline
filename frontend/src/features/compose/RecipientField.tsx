@@ -77,7 +77,7 @@ export function RecipientField({ value, onChange, max, invalid }: {
       <div className="flex min-h-10 items-center gap-3">
         <div className={cn('flex min-w-0 flex-1 flex-wrap items-center gap-1.5 py-1.5', invalid && !value.length && 'rounded ring-1 ring-red-300')}>
           {shown.map((addr) => (
-            <span key={addr} className="inline-flex h-6 items-center gap-1 rounded-full border border-brand-500 bg-white pr-1 pl-2.5 text-[11px] text-ink">
+            <span key={addr} className="inline-flex h-6 items-center gap-1 rounded-full border border-brand-500 bg-surface pr-1 pl-2.5 text-[11px] text-ink">
               {addr}
               <button type="button" aria-label={`Remove ${addr}`} className="rounded-full p-0.5 text-muted hover:text-ink" onClick={() => onChange(value.filter((v) => v !== addr))}>
                 <X className="size-3" />

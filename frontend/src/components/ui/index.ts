@@ -6,3 +6,4 @@ export * from './StatusPill';
 export * from './Popover';
 export * from './States';
 export * from './Toast';
+export * from './ThemeToggle';

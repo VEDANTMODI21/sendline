@@ -88,7 +88,7 @@ export const RichTextEditor = forwardRef<RichTextHandle, { placeholder?: string;
 
     return (
       <div className={cn('rounded-lg bg-canvas/70 p-3', invalid && 'ring-1 ring-red-300')}>
-        <div className="flex flex-wrap items-center gap-0.5 rounded-full bg-white px-2 py-1 shadow-[0_0_0_1px_var(--color-line)]" role="toolbar" aria-label="Formatting">
+        <div className="flex flex-wrap items-center gap-0.5 rounded-full bg-surface px-2 py-1 shadow-[0_0_0_1px_var(--color-line)]" role="toolbar" aria-label="Formatting">
           <Tool label="Undo" onRun={() => run('undo')}><Undo2 className="size-4" /></Tool>
           <Tool label="Redo" onRun={() => run('redo')}><Redo2 className="size-4" /></Tool>
           <Divider />
@@ -106,7 +106,7 @@ export const RichTextEditor = forwardRef<RichTextHandle, { placeholder?: string;
               <Type className="size-4" /> <ChevronDown className="size-3" />
             </button>
             {sizeOpen && (
-              <div className="absolute top-full left-0 z-30 mt-1 w-28 rounded-md border border-line bg-white p-1 shadow-pop">
+              <div className="absolute top-full left-0 z-30 mt-1 w-28 rounded-md border border-line bg-surface p-1 shadow-pop">
                 {SIZES.map((s) => (
                   <button
                     key={s.value}

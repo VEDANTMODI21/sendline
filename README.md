@@ -24,6 +24,22 @@ A production-style email scheduler: schedule campaigns from a dashboard, send th
                                    └───────────────────────────────────────────────┘
 ```
 
+## Screenshots
+
+All screenshots are in [`ss/`](ss/). Each screen has a light and a dark (black) version.
+
+| | Light | Dark |
+|---|---|---|
+| Login (Google OAuth) | ![](ss/light-01-login.png) | ![](ss/dark-01-login.png) |
+| Scheduled: timed and **deferred** (hourly limit) pills | ![](ss/light-02-scheduled.png) | ![](ss/dark-02-scheduled.png) |
+| Sent | ![](ss/light-03-sent.png) | ![](ss/dark-03-sent.png) |
+| Email detail + delivery metadata | ![](ss/light-04-email-detail.png) | ![](ss/dark-04-email-detail.png) |
+| Compose: CSV upload with detected-address count | ![](ss/light-05-compose-upload.png) | ![](ss/dark-05-compose-upload.png) |
+| Compose: Send Later picker | ![](ss/light-06-send-later.png) | ![](ss/dark-06-send-later.png) |
+| Account menu: Slack connected, queue monitor, logout | ![](ss/light-07-user-menu-slack.png) | ![](ss/dark-07-user-menu-slack.png) |
+| Search (Elasticsearch) | ![](ss/light-08-search.png) | ![](ss/dark-08-search.png) |
+| Live BullMQ dashboard (`/admin/queues`) | ![](ss/light-09-queue-monitor.png) | |
+
 ---
 
 ## Run it locally
@@ -227,6 +243,7 @@ Bull Board is at **`/admin/queues`**. It shows the `sendline-dispatch` and `send
   - search, status filter, keyset "Load more".
 - [x] Email detail view: delivery metadata, Ethereal preview link, and cancel for pending emails.
 - [x] Loading skeletons, empty states, error states with retry, toasts, inline validation.
+- [x] Light and **dark (black) theme**: toggle in the sidebar, login, compose and detail views. It follows the OS setting by default and remembers your choice.
 - [x] Reusable UI kit (`components/ui`), typed API layer (`types/api.ts`, `lib/api.ts`), feature-based folders.
 
 ## Assumptions and trade-offs

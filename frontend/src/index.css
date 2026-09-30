@@ -11,6 +11,7 @@
   --color-brand-600: #0e9142;
   --color-brand-700: #0b7a37;
 
+  --color-surface: #ffffff;
   --color-ink: #1c1c1c;
   --color-ink-soft: #4a4a4a;
   --color-muted: #9b9b9b;
@@ -24,6 +25,41 @@
   --shadow-pop: 0 10px 30px -10px rgb(0 0 0 / 0.18), 0 2px 6px rgb(0 0 0 / 0.06);
 }
 
+/*
+ * Dark (black) theme: the same semantic tokens, re-pointed. Every utility reads var(--color-*),
+ * so flipping data-theme on <html> re-skins the whole app without per-component dark: variants.
+ */
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --color-surface: #000000;
+  --color-canvas: #141414;
+  --color-line: #262626;
+  --color-ink: #f1f1f1;
+  --color-ink-soft: #c4c4c4;
+  --color-muted: #8b8b8b;
+
+  --color-brand-50: #0b2215;
+  --color-brand-100: #10311f;
+  --color-brand-200: #1c6139;
+  --color-brand-500: #22c55e;
+  --color-brand-600: #3ddc75;
+  --color-brand-700: #5eea8f;
+
+  --color-amber-tint: #291805;
+  --color-amber-ink: #fdba74;
+  --color-amber-line: #6b3f12;
+  --color-amber-50: #291805;
+  --color-amber-300: #b45309;
+
+  --color-red-50: #2a0d0d;
+  --color-red-200: #6b1f1f;
+  --color-red-300: #8b2a2a;
+  --color-red-600: #f87171;
+  --color-red-700: #fca5a5;
+
+  --shadow-pop: 0 12px 32px -10px rgb(0 0 0 / 0.9), 0 0 0 1px #262626;
+}
+
 @layer base {
   html,
   body,
@@ -31,7 +67,7 @@
     height: 100%;
   }
   body {
-    @apply bg-white font-sans text-ink antialiased;
+    @apply bg-surface font-sans text-ink antialiased;
     font-size: 13px;
   }
   ::selection {

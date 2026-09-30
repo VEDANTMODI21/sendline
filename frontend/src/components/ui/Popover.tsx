@@ -31,7 +31,7 @@ export function Popover({ open, onClose, children, className, align = 'right' }:
       ref={ref}
       role="dialog"
       className={cn(
-        'absolute top-full z-40 mt-2 rounded-lg border border-line bg-white shadow-pop',
+        'absolute top-full z-40 mt-2 rounded-lg border border-line bg-surface shadow-pop',
         align === 'right' ? 'right-0' : 'left-0',
         className,
       )}

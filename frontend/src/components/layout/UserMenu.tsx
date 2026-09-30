@@ -41,8 +41,10 @@ export function UserMenu({ user }: { user: User }) {
         {connection ? (
           <>
             <div className="mx-2.5 mb-1 flex items-center gap-2 rounded-md bg-brand-50 px-2.5 py-2 text-xs text-brand-700">
-              <span className="size-1.5 rounded-full bg-brand-500" />
-              Connected to <b className="font-semibold">{connection.channelName}</b> · {connection.teamName}
+              <span className="size-1.5 shrink-0 rounded-full bg-brand-500" />
+              <span className="min-w-0">
+                Connected to <b className="font-semibold">{connection.channelName}</b> · {connection.teamName}
+              </span>
             </div>
             <MenuItem icon={<Send className="size-4 text-muted" />} onClick={sendTest}>
               {test.isPending ? 'Sending test…' : 'Send test message'}

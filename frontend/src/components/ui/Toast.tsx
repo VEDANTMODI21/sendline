@@ -29,7 +29,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       {children}
       <div className="pointer-events-none fixed right-4 bottom-4 z-50 flex w-80 flex-col gap-2" aria-live="polite">
         {items.map((t) => (
-          <div key={t.id} className={cn('animate-toast pointer-events-auto flex gap-2.5 rounded-lg border border-line bg-white p-3 shadow-pop')}>
+          <div key={t.id} className={cn('animate-toast pointer-events-auto flex gap-2.5 rounded-lg border border-line bg-surface p-3 shadow-pop')}>
             <span className="mt-0.5">{icon[t.tone]}</span>
             <div className="min-w-0 flex-1">
               <p className="text-[13px] font-medium">{t.title}</p>
