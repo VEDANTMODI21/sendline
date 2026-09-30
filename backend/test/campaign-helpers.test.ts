@@ -31,9 +31,9 @@ test('sanitizeBody strips scripts/handlers but keeps formatting', async () => {
 
 test('sealed secrets round-trip and are tamper-evident', async () => {
   const { seal, unseal } = await import('../src/infra/crypto');
-  const s = seal('https://hooks.slack.com/services/T/B/x');
-  assert.notEqual(s, 'https://hooks.slack.com/services/T/B/x');
-  assert.equal(unseal(s), 'https://hooks.slack.com/services/T/B/x');
+  const s = seal('https://example.test/webhook/dummy');
+  assert.notEqual(s, 'https://example.test/webhook/dummy');
+  assert.equal(unseal(s), 'https://example.test/webhook/dummy');
   const [v, iv, tag, body] = s.split('.');
   assert.throws(() => unseal([v, iv, tag, body.slice(0, -2) + 'AA'].join('.')));
 });
