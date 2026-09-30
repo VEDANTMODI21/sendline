@@ -1,0 +1,62 @@
+# Local infrastructure for Sendline.
+#   docker compose up -d                 → Postgres, Redis, Elasticsearch (run the app with npm)
+#   docker compose --profile app up -d   → the above + the app itself on http://localhost:4000
+# Host ports are offset (5433 / 6380) so they don't clash with a locally installed Postgres/Redis.
+name: sendline
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: sendline
+      POSTGRES_PASSWORD: sendline
+      POSTGRES_DB: sendline
+    ports: ["5433:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sendline"]
+      interval: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    # AOF persistence: delayed jobs and rate-limit counters survive a Redis restart.
+    command: ["redis-server", "--appendonly", "yes", "--appendfsync", "everysec"]
+    ports: ["6380:6379"]
+    volumes: [redisdata:/data]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 10
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ports: ["9200:9200"]
+    volumes: [esdata:/usr/share/elasticsearch/data]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      retries: 20
+
+  app:
+    profiles: ["app"]
+    build: .
+    env_file: backend/.env
+    environment:
+      APP_URL: http://localhost:4000
+      DATABASE_URL: postgres://sendline:sendline@postgres:5432/sendline
+      REDIS_URL: redis://redis:6379
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports: ["4000:4000"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+
+volumes:
+  pgdata: {}
+  redisdata: {}
+  esdata: {}

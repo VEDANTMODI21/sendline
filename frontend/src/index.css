@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-pixel: 'Silkscreen', ui-monospace, monospace;
+
+  --color-brand-50: #eefaf2;
+  --color-brand-100: #dcf4e4;
+  --color-brand-200: #b6e8c8;
+  --color-brand-500: #16a34a;
+  --color-brand-600: #0e9142;
+  --color-brand-700: #0b7a37;
+
+  --color-ink: #1c1c1c;
+  --color-ink-soft: #4a4a4a;
+  --color-muted: #9b9b9b;
+  --color-line: #ececec;
+  --color-canvas: #f6f6f6;
+
+  --color-amber-tint: #fff3e8;
+  --color-amber-ink: #c2570c;
+  --color-amber-line: #fbd9bb;
+
+  --shadow-pop: 0 10px 30px -10px rgb(0 0 0 / 0.18), 0 2px 6px rgb(0 0 0 / 0.06);
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+    font-size: 13px;
+  }
+  ::selection {
+    @apply bg-brand-100;
+  }
+}
+
+/* Rich text editor + rendered email bodies share typography. */
+.prose-mail {
+  @apply text-[13px] leading-relaxed text-ink;
+}
+.prose-mail p,
+.prose-mail div {
+  @apply my-0;
+}
+.prose-mail ul {
+  @apply my-2 list-disc pl-6;
+}
+.prose-mail ol {
+  @apply my-2 list-decimal pl-6;
+}
+.prose-mail blockquote {
+  @apply my-2 border-l-[3px] border-amber-300 bg-amber-50/70 px-3 py-2;
+}
+.prose-mail a {
+  @apply text-brand-700 underline;
+}
+.prose-mail h1 {
+  @apply text-xl font-semibold;
+}
+.prose-mail h2 {
+  @apply text-lg font-semibold;
+}
+.editor-surface:empty::before {
+  content: attr(data-placeholder);
+  @apply pointer-events-none text-muted;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-toast {
+  animation: toast-in 180ms ease-out;
+}

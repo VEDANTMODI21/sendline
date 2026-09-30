@@ -1,0 +1,42 @@
+# One-click deploy on Render (Blueprint). Elasticsearch is external (e.g. Bonsai / Elastic Cloud);
+# without it the app still runs and search falls back to Postgres.
+services:
+  - type: web
+    name: sendline
+    runtime: docker
+    plan: starter            # free instances sleep, which would pause the scheduler
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_URL
+        sync: false          # e.g. https://sendline.onrender.com
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase: { name: sendline-db, property: connectionString }
+      - key: REDIS_URL
+        fromService: { type: keyvalue, name: sendline-redis, property: connectionString }
+      - key: ELASTICSEARCH_URL
+        sync: false
+      - key: ELASTICSEARCH_API_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: SLACK_CLIENT_ID
+        sync: false
+      - key: SLACK_CLIENT_SECRET
+        sync: false
+      - key: ETHEREAL_AUTO_PROVISION
+        value: "3"
+  - type: keyvalue
+    name: sendline-redis
+    plan: starter
+    maxmemoryPolicy: noeviction   # BullMQ requirement: never evict job keys
+    ipAllowList: []
+
+databases:
+  - name: sendline-db
+    plan: basic-256mb
